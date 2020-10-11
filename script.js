@@ -9,6 +9,7 @@ function load() {
         })
         .catch(function (error) { // Fehler
             console.error('Fehler beim laden!', error);
+            
         });
 }
 
@@ -48,10 +49,15 @@ function showAll(){
         let speciality = doctors[i]['specialities'];
         let street = doctors[i]['street'];
         let city = doctors[i]['zipcode'] + " " + doctors[i]['city'];
-        let open = doctors[i]['opening_hours'];
+        let monday = doctors[i].opening_hours['monday'];
+        let tuesday = doctors[i].opening_hours['tuesday'];
+        let wednesday = doctors[i].opening_hours['wednesday'];
+        let thursday = doctors[i].opening_hours['thursday'];
+        let friday = doctors[i].opening_hours['friday'];
+        let saturday = doctors[i].opening_hours['saturday'];
+        let sunday = doctors[i].opening_hours['sunday'];
         let img = doctors[i]['img'];
-        console.log(open);
-
+        
         let DocCard= `
         <h3>${name}</h3>
         <div class="cardContainer">
@@ -63,10 +69,22 @@ function showAll(){
                             <p>${street}</p>
                             <p>${city}</p>
                             <h6>Öffnungszeiten:</h6>
-                            <p>${open}</p>
-
+                            <p>Montag: ${monday}</p>
+                            <p>Dienstag: ${tuesday}</p>
+                            <p>Mittwoch: ${wednesday}</p>
+                            <p>Donnerstag: ${thursday}</p>
+                            <p>Freitag: ${friday}</p>
+                            <p>Samstag: ${saturday}<p>
+                            <p>Sonntag: ${sunday}</p>
 
                         </div>`
-        vCard.insertAdjacentHTML("beforeend", DocCard); 
+        vCard.insertAdjacentHTML("beforeend", DocCard);
+        //return DocCard;
     }
+    showVCard();
+}
+
+function showVCard(){
+    let vCard = document.getElementById('vCard');
+    vCard.insertAdjacentHTML("beforeend", DocCard); 
 }
