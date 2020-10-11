@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>Arzt Finder - Suche</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="script.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="header">
+        <img src="img/logo.png" class="logo">
+        <div>
+            <button type="button" class="btn btn-success">Arzt finden</button>
+            <button type="button" class="btn btn-success">Datenschutz</button>
+            <button type="button" class="btn btn-success">Impressum</button>
+        </div>
+    </div>
+
+    <div class="content_frame">
+        <img class="background_img" src="img/background.jpg">
+        <div class="content_search">
+            <h2>Arztsuche:</h2>
+            <div class="functions">
+                <div class="select">
+                    <h5>Spezialisierung: </h5>
+                    <select class="select" name="speciaity" id="speciality">
+                        <option value="Allgemeinmedizin">Allgemeinmedizin</option>
+                        <option value="Dermatologie">Dermatologie</option>
+                        <option value="Zahnmedizin">Zahnmedizin</option>
+                        <option value="Mund-Kiefer-Gesichtschirurgie">Mund-Kiefer-Gesichtschirurgie</option>
+                        <option value="Radiologie">Radiologie</option>
+                    </select>
+                </div>
+                <div><button type="button" class="btn btn-success">Suche starten</button></div>
+            </div>
+            <div class="list">
+                <div class="previous">
+                    <img class="next-prev-img" src="img/previous.png">
+                </div>
+                <div class="doctors">
+                    
+                        <h3>Dr. Max Mustermann</h3>
+
+                        <div class="cardContainer">
+                            <div class=cardLeft><img class="card_img" src="img/sonja_huber.jpg"></div>
+                            <div class=cardRight>
+                                <h6>Spezialgebiet:</h6>
+                                <p>Allgemeinmedizin</p>
+                                <h6>Adresse:</h6>
+                                <p>Schönbergstraße 5</p>
+                                <p>57394 München</p>
+                                <h6>Öffnungszeiten:</h6>
+                                <p>Montag: 8:00 bis 14:00</p>
+                                <p>Dienstag: 8:00 bis 14:00</p>
+                                <p>Mittwoch: 16:00 bis 20:00</p>
+                                <p>Donnerstag: geschlossen</p>
+                                <p>Freitag: 8:00 bis 10:00</p>
+                                <p>Samstag: 8:00 bis 10:00</p>
+                                <p>Sonntag: geschlossen</p>
+
+
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="next">
+                    <img class="next-prev-img" src="img/next.png">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

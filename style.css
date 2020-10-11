@@ -1,11 +1,26 @@
-body{
+body {
     margin: 0;
     display: flex;
     font-family: 'Work Sans', sans-serif;
     flex-direction: column;
 }
 
-.header{
+p{
+    margin: 0 !important;
+    font-size: 13px;
+}
+
+h6{
+    font-size: 18px !important;
+    margin-top: 6px !important;
+    margin-bottom: 3px !important;
+}
+
+h3{
+    padding-bottom: 40px !important;
+}
+
+.header {
     background-color: #34c0eb;
     width: -webkit-fill-available;
     position: relative;
@@ -14,25 +29,24 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
-.header_img{
+.header_img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-h1{
+h1 {
     color: darkgray;
     font-size: 50px;
 }
 
-.logo{
+.logo {
     width: 350px;
 }
 
-.container{
+.container {
     display: flex;
     position: absolute;
     width: -webkit-fill-available;
@@ -41,7 +55,7 @@ h1{
     align-items: center;
 }
 
-.cta{
+.cta {
     height: 70px;
     width: 320px;
     font-size: 22px;
@@ -50,18 +64,19 @@ h1{
     cursor: pointer;
 }
 
-.content_frame{
+.content_frame {
     width: 100%;
     height: calc(100% - 101px);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-.content{
-display: flex;
-position: absolute;
-flex-direction: column;
+.content {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
     align-items: center;
     background-color: white;
     padding: 16px;
@@ -69,9 +84,94 @@ flex-direction: column;
     border-radius: 12px;
 }
 
-.background_img{
+.background_img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     display: flex;
+}
+
+.content_search {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.functions{
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    border-bottom: solid darkgray 1px;
+    padding-bottom: 12px;
+}
+
+.select{
+    flex-direction: row;
+    display: flex;
+}
+
+.select{
+    height: fit-content;
+    align-items: center;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.list{
+    width: 100%;
+    height: 100%;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.doctors{
+    width: 80%;
+    height: 90%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;    
+}
+
+.next-prev-img{
+    width: 40px;
+    height: 40px;
+}
+
+.cardLeft{
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.cardRight{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardContainer{
+    display: flex;
+    width: 90%;
+    height: 70%;
+}
+
+.card_img{
+    width: 60%;
+    height: 100%;
+    object-fit: cover;
 }
