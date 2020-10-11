@@ -2,12 +2,13 @@ body{
     margin: 0;
     display: flex;
     font-family: 'Work Sans', sans-serif;
+    flex-direction: column;
 }
 
 .header{
     background-color: #34c0eb;
     width: -webkit-fill-available;
-    position: absolute;
+    position: relative;
     padding: 16px;
     color: white;
     display: flex;
@@ -47,5 +48,30 @@ h1{
     border-radius: 18px;
     background-color: azure;
     cursor: pointer;
+}
 
+.content_frame{
+    width: 100%;
+    height: calc(100% - 101px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{
+display: flex;
+position: absolute;
+flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.background_img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
