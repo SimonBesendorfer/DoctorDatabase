@@ -27,7 +27,7 @@ function load() {
 function loadJSONFromServer() {
     return new Promise(function (resolve, reject) {
         let xhttp = new XMLHttpRequest();
-        let proxy = 'https://cors-anywhere.herokuapp.com/';
+        let proxy = determineProxySettings();
         let serverURL = proxy + BASE_SERVER_URL + 'doctors.json';
         xhttp.open('GET', serverURL);
 
@@ -46,6 +46,18 @@ function loadJSONFromServer() {
 
     });
 }
+
+/**
+ * determineProxySettings() contains some necessary information for working
+ * on the document online or offline
+ */
+function determineProxySettings() {
+    if (window.location.href.indexOf('.developerakademie.com') > -1) {
+        return '';
+    } else {
+        return 'https://cors-anywhere.herokuapp.com/';
+    }
+  }
 
 /**
  * the function showAll() ist started by clicking on the Button "alle anzeigen"
