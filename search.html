@@ -15,11 +15,11 @@
 
 <body onload="load()">
     <div class="header">
-        <img src="img/logo.png" class="logo">
+        <a href="index.html"><img src="img/logo.png" class="logo"></a>
         <div>
-            <button type="button" class="btn btn-success">Arzt finden</button>
-            <button type="button" class="btn btn-success">Datenschutz</button>
-            <button type="button" class="btn btn-success">Impressum</button>
+            <a href="search.html"><button type="button" class="btn btn-success">Arzt finden</button></a>
+            <a href="dataprotection.html"><button class="btn btn-success">Datenschutz</button></a>
+            <a href="imprint.html"><button class="btn btn-success">Impressum</button></a>
         </div>
     </div>
 
@@ -44,8 +44,8 @@
                 </div>
             </div>
             <div class="list">
-                <div class="previous">
-                    <img class="next-prev-img" src="img/previous.png">
+                <div style="width: 40px;" class="previous" id="previous">
+                    
                 </div>
                 <div class="doctors" id='vCard'>
 
@@ -73,8 +73,8 @@
                     </div>
 
                 </div>
-                <div class="next">
-                    <img class="next-prev-img" src="img/next.png">
+                <div  style="width: 40px;" class="next" id="next">
+                    
                 </div>
             </div>
 

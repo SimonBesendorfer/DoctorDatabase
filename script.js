@@ -1,10 +1,11 @@
 const BASE_SERVER_URL = 'http://simon-besendorfer.developerakademie.com/PHP_DD/';
 let doctors = [];
+let vCards =[];
+let searched = [];
 
 function load() {
     loadJSONFromServer()
         .then(function (result) { //then(function (variable vom server))
-            console.log('Laden erfolgreich!', result);
             doctors = JSON.parse(result);            
         })
         .catch(function (error) { // Fehler
@@ -35,11 +36,6 @@ function loadJSONFromServer() {
 
     });
 }
-
-function search(){
-    showDoctors();
-}
-
 
 function showAll(){
     let vCard = document.getElementById('vCard');
@@ -78,13 +74,31 @@ function showAll(){
                             <p>Sonntag: ${sunday}</p>
 
                         </div>`
-        vCard.insertAdjacentHTML("beforeend", DocCard);
-        //return DocCard;
+        vCards.push(DocCard);       
     }
-    showVCard();
+    showVCard(0);
 }
 
-function showVCard(){
+function showVCard(a){
     let vCard = document.getElementById('vCard');
-    vCard.insertAdjacentHTML("beforeend", DocCard); 
+    vCard.innerHTML = "";
+    document.getElementById('previous').innerHTML ="";
+    document.getElementById('next').innerHTML ="";
+    vCard.insertAdjacentHTML("beforeend", vCards[a]);
+    if(a > 0){
+    document.getElementById('previous').innerHTML = `<img class="next-prev-img" src="img/previous.png" onclick="showVCard(${a-1})"></img>`;
+    }
+    if(a < vCards.length-1){
+    document.getElementById('next').innerHTML = `<img class="next-prev-img" src="img/next.png"onclick="showVCard(${a+1})"></img>`;
+    }
+}
+
+function search(){
+    
+    for (let i = 0; i < doctors.length; i++){
+        let needed = document.getElementById('speciality').value;
+        if (doctors[i].specialities.includes(needed)){
+            console.log(doctors[i].name);
+        }
+    }
 }
