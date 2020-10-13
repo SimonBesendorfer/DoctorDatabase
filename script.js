@@ -3,6 +3,12 @@ let doctors = [];
 let vCards =[];
 let searched = [];
 
+/**
+ * load() is startet when opening search.html
+ * it starts the function loadJSONFromServer()
+ * when the file is loaded, it will fill parse the result into doctors Array
+ * if there is an error, it will continue with the function error()
+ */
 function load() {
     loadJSONFromServer()
         .then(function (result) { //then(function (variable vom server))
@@ -10,10 +16,14 @@ function load() {
         })
         .catch(function (error) { // Fehler
             console.error('Fehler beim laden!', error);
-            
+            error();
         });
 }
 
+/**
+ * loadJSONFromServer() is a get request via proxy Server to the previously defined
+ * BASE_SERVER_URL and gets the doctors.json file
+ */
 function loadJSONFromServer() {
     return new Promise(function (resolve, reject) {
         let xhttp = new XMLHttpRequest();
@@ -37,7 +47,13 @@ function loadJSONFromServer() {
     });
 }
 
+/**
+ * the function showAll() ist started by clicking on the Button "alle anzeigen"
+ * it will empty the div with the id="vCard" and fills the previous definded vCards Array
+ * afterwards it will start the function showVCard()
+ */
 function showAll(){
+    vCards =[];
     let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
     for (let i = 0; i < doctors.length; i++) {
@@ -79,6 +95,10 @@ function showAll(){
     showVCard(0);
 }
 
+/**
+ * showVCard() shows the HTML which is in the function showAll() or showSearched()
+ * it displays the content which is saved in vCards Array in the div id="vCard"
+ */
 function showVCard(a){
     let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
@@ -93,12 +113,77 @@ function showVCard(a){
     }
 }
 
+/**
+ * search() is a simply search function which checks for matches in
+ * doctors Array for specialities and pushes the results in to the
+ * searched Array
+ */
 function search(){
-    
+    searched = [];
+    vCards = [];
     for (let i = 0; i < doctors.length; i++){
         let needed = document.getElementById('speciality').value;
-        if (doctors[i].specialities.includes(needed)){
-            console.log(doctors[i].name);
+        if (doctors[i].specialities[0].includes(needed)){
+            console.log(doctors[i]);
+            searched.push(doctors[i]);
         }
     }
+    showSearched();
+}
+
+
+/**
+ * the function showSearched() ist started by clicking on the Button "Suche starten"
+ * it will empty the div with the id="vCard" and fills the previous definded vCards Array
+ * afterwards it will start the function showVCard()
+ */
+function showSearched(){
+let vCard = document.getElementById('vCard');
+    vCard.innerHTML = "";
+    for (let i = 0; i < searched.length; i++) {
+        let name = searched[i]['title'] + " " + searched[i]['first_name'] + " " + searched[i]['last_name'];
+        let speciality = searched[i]['specialities'];
+        let street = searched[i]['street'];
+        let city = searched[i]['zipcode'] + " " + searched[i]['city'];
+        let monday = searched[i].opening_hours['monday'];
+        let tuesday = searched[i].opening_hours['tuesday'];
+        let wednesday = searched[i].opening_hours['wednesday'];
+        let thursday = searched[i].opening_hours['thursday'];
+        let friday = searched[i].opening_hours['friday'];
+        let saturday = searched[i].opening_hours['saturday'];
+        let sunday = searched[i].opening_hours['sunday'];
+        let img = searched[i]['img'];
+        
+        let DocCard= `
+        <h3>${name}</h3>
+        <div class="cardContainer">
+                        <div class=cardLeft><img class="card_img" src="${img}"></div>
+                        <div class=cardRight>
+                            <h6>Spezialgebiet:</h6>
+                            <p>${speciality}</p>
+                            <h6>Adresse:</h6>
+                            <p>${street}</p>
+                            <p>${city}</p>
+                            <h6>Öffnungszeiten:</h6>
+                            <p>Montag: ${monday}</p>
+                            <p>Dienstag: ${tuesday}</p>
+                            <p>Mittwoch: ${wednesday}</p>
+                            <p>Donnerstag: ${thursday}</p>
+                            <p>Freitag: ${friday}</p>
+                            <p>Samstag: ${saturday}<p>
+                            <p>Sonntag: ${sunday}</p>
+
+                        </div>`
+        vCards.push(DocCard);       
+    }
+    showVCard(0);
+}
+
+/**
+ * error() is running when ther is an error while loading the JSON from the PHP Server
+ * it will show a PopUp Window with the option to reload the site by clicking
+ * on the button "neu Laden"
+ */
+function error(){
+    document.getElementById("error").classList.remove('d-none');
 }

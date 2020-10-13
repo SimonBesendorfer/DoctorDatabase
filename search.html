@@ -25,7 +25,7 @@
 
     <div class="content_frame">
         <img class="background_img" src="img/background.jpg">
-        <div class="content_search">
+        <div class="content_search" style="overflow: auto;">
             <h2>Arztsuche:</h2>
             <div class="functions">
                 <div class="select">
@@ -49,26 +49,14 @@
                 </div>
                 <div class="doctors" id='vCard'>
 
-                    <h3>Dr. Max Mustermann</h3>
+                    <h3>hier finden Sie den Passenden Arzt für Ihre Anliegen!</h3>
 
                     <div class="cardContainer">
-                        <div class=cardLeft><img class="card_img" src="img/sonja_huber.jpg"></div>
+                        <div class=cardLeft><img src="img/stethoscope.png" style="width: 60%; object-fit: contain;"></div>
                         <div class=cardRight>
-                            <h6>Spezialgebiet:</h6>
-                            <p>Allgemeinmedizin</p>
-                            <h6>Adresse:</h6>
-                            <p>Schönbergstraße 5</p>
-                            <p>57394 München</p>
-                            <h6>Öffnungszeiten:</h6>
-                            <p>Montag: 8:00 bis 14:00</p>
-                            <p>Dienstag: 8:00 bis 14:00</p>
-                            <p>Mittwoch: 16:00 bis 20:00</p>
-                            <p>Donnerstag: geschlossen</p>
-                            <p>Freitag: 8:00 bis 10:00</p>
-                            <p>Samstag: 8:00 bis 10:00</p>
-                            <p>Sonntag: geschlossen</p>
-
-
+                            <h3>Info:</h3>
+                            <h6 style="text-align: center;">Planen Sie einen Besuch in der Praxis?</h6>
+                            <h6 style="text-align: center;">Vergessen Sie nicht Ihre Versicherungskarte und einen Mundschutz mit zu bringen.</h6>
                         </div>
                     </div>
 
@@ -80,7 +68,14 @@
 
         </div>
     </div>
-
+    <div id="error" class="error, d-none">
+        <div class="errorPopup">
+            <h3>Hoppla! Das sollte nicht passieren</h3>
+            <p>Beim Laden unserer Datenbank ist ein Fehler aufgetreten.</p>
+            <p style="padding-bottom: 24px;">Bitte versuche es nochmal!</p>
+            <button type="button" class="btn btn-success" onclick="location.reload()">neu Laden</button>
+        </div>
+    </div>
 
 </body>
 
