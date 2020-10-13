@@ -16,7 +16,7 @@ function load() {
         })
         .catch(function (error) { // Fehler
             console.error('Fehler beim laden!', error);
-            error();
+            document.getElementById("error").classList.remove('d-none');
         });
 }
 
