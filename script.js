@@ -124,7 +124,6 @@ function search(){
     for (let i = 0; i < doctors.length; i++){
         let needed = document.getElementById('speciality').value;
         if (doctors[i].specialities[0].includes(needed)){
-            console.log(doctors[i]);
             searched.push(doctors[i]);
         }
     }
