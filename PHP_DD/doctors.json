@@ -2,7 +2,7 @@
         "title": "Dr. med.",
         "first_name": "Anton",
         "last_name": "Kraus",
-        "specialities": ["Dermatologie, Allgemeinmedizin"],
+        "specialities": ["Dermatologie", "Allgemeinmedizin"],
         "img": "img/anton_kraus.jpg",
         "street": "Lilienstr. 3",
         "zipcode": "81669",

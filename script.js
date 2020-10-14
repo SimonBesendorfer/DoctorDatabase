@@ -1,6 +1,6 @@
 const BASE_SERVER_URL = 'http://simon-besendorfer.developerakademie.com/PHP_DD/';
 let doctors = [];
-let vCards =[];
+let vCards = [];
 let searched = [];
 
 /**
@@ -12,7 +12,7 @@ let searched = [];
 function load() {
     loadJSONFromServer()
         .then(function (result) { //then(function (variable vom server))
-            doctors = JSON.parse(result);            
+            doctors = JSON.parse(result);
         })
         .catch(function (error) { // Fehler
             console.error('Fehler beim laden!', error);
@@ -28,7 +28,7 @@ function loadJSONFromServer() {
     return new Promise(function (resolve, reject) {
         let xhttp = new XMLHttpRequest();
         let proxy = 'https://cors-anywhere.herokuapp.com/';
-        let serverURL = proxy + BASE_SERVER_URL + 'doctors.json';
+        let serverURL = proxy + BASE_SERVER_URL + 'get_doctors.php';
         xhttp.open('GET', serverURL);
 
         xhttp.onreadystatechange = function (oEvent) {
@@ -52,45 +52,13 @@ function loadJSONFromServer() {
  * it will empty the div with the id="vCard" and fills the previous definded vCards Array
  * afterwards it will start the function showVCard()
  */
-function showAll(){
-    vCards =[];
+function showAll() {
+    vCards = [];
     let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
     for (let i = 0; i < doctors.length; i++) {
-        let name = doctors[i]['title'] + " " + doctors[i]['first_name'] + " " + doctors[i]['last_name'];
-        let speciality = doctors[i]['specialities'];
-        let street = doctors[i]['street'];
-        let city = doctors[i]['zipcode'] + " " + doctors[i]['city'];
-        let monday = doctors[i].opening_hours['monday'];
-        let tuesday = doctors[i].opening_hours['tuesday'];
-        let wednesday = doctors[i].opening_hours['wednesday'];
-        let thursday = doctors[i].opening_hours['thursday'];
-        let friday = doctors[i].opening_hours['friday'];
-        let saturday = doctors[i].opening_hours['saturday'];
-        let sunday = doctors[i].opening_hours['sunday'];
-        let img = doctors[i]['img'];
-        
-        let DocCard= `
-        <h3>${name}</h3>
-        <div class="cardContainer">
-                        <div class=cardLeft><img class="card_img" src="${img}"></div>
-                        <div class=cardRight>
-                            <h6>Spezialgebiet:</h6>
-                            <p>${speciality}</p>
-                            <h6>Adresse:</h6>
-                            <p>${street}</p>
-                            <p>${city}</p>
-                            <h6>Öffnungszeiten:</h6>
-                            <p>Montag: ${monday}</p>
-                            <p>Dienstag: ${tuesday}</p>
-                            <p>Mittwoch: ${wednesday}</p>
-                            <p>Donnerstag: ${thursday}</p>
-                            <p>Freitag: ${friday}</p>
-                            <p>Samstag: ${saturday}<p>
-                            <p>Sonntag: ${sunday}</p>
-
-                        </div>`
-        vCards.push(DocCard);       
+        let DocCard = generateDocCard(doctors[i]);
+        vCards.push(DocCard);
     }
     showVCard(0);
 }
@@ -99,17 +67,17 @@ function showAll(){
  * showVCard() shows the HTML which is in the function showAll() or showSearched()
  * it displays the content which is saved in vCards Array in the div id="vCard"
  */
-function showVCard(a){
+function showVCard(a) {
     let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
-    document.getElementById('previous').innerHTML ="";
-    document.getElementById('next').innerHTML ="";
+    document.getElementById('previous').innerHTML = "";
+    document.getElementById('next').innerHTML = "";
     vCard.insertAdjacentHTML("beforeend", vCards[a]);
-    if(a > 0){
-    document.getElementById('previous').innerHTML = `<img class="next-prev-img" src="img/previous.png" onclick="showVCard(${a-1})"></img>`;
+    if (a > 0) {
+        document.getElementById('previous').innerHTML = `<img class="next-prev-img" src="img/previous.png" onclick="showVCard(${a - 1})"></img>`;
     }
-    if(a < vCards.length-1){
-    document.getElementById('next').innerHTML = `<img class="next-prev-img" src="img/next.png"onclick="showVCard(${a+1})"></img>`;
+    if (a < vCards.length - 1) {
+        document.getElementById('next').innerHTML = `<img class="next-prev-img" src="img/next.png"onclick="showVCard(${a + 1})"></img>`;
     }
 }
 
@@ -118,14 +86,16 @@ function showVCard(a){
  * doctors Array for specialities and pushes the results in to the
  * searched Array
  */
-function search(){
+function search() {
     searched = [];
     vCards = [];
-    for (let i = 0; i < doctors.length; i++){
+    for (let i = 0; i < doctors.length; i++) {
         let needed = document.getElementById('speciality').value;
-        if (doctors[i].specialities[0].includes(needed)){
+        if (doctors[i].specialities.includes(needed)) {
             searched.push(doctors[i]);
         }
+
+        console.log(searched);
     }
     showSearched();
 }
@@ -136,8 +106,8 @@ function search(){
  * it will empty the div with the id="vCard" and fills the previous definded vCards Array
  * afterwards it will start the function showVCard()
  */
-function showSearched(){
-let vCard = document.getElementById('vCard');
+function showSearched() {
+    let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
     for (let i = 0; i < searched.length; i++) {
         let name = searched[i]['title'] + " " + searched[i]['first_name'] + " " + searched[i]['last_name'];
@@ -152,8 +122,8 @@ let vCard = document.getElementById('vCard');
         let saturday = searched[i].opening_hours['saturday'];
         let sunday = searched[i].opening_hours['sunday'];
         let img = searched[i]['img'];
-        
-        let DocCard= `
+
+        let DocCard = `
         <h3>${name}</h3>
         <div class="cardContainer">
                         <div class=cardLeft><img class="card_img" src="${img}"></div>
@@ -173,7 +143,7 @@ let vCard = document.getElementById('vCard');
                             <p>Sonntag: ${sunday}</p>
 
                         </div>`
-        vCards.push(DocCard);       
+        vCards.push(DocCard);
     }
     showVCard(0);
 }
@@ -183,6 +153,6 @@ let vCard = document.getElementById('vCard');
  * it will show a PopUp Window with the option to reload the site by clicking
  * on the button "neu Laden"
  */
-function error(){
+function error() {
     document.getElementById("error").classList.remove('d-none');
 }
