@@ -103,7 +103,7 @@ function search() {
     vCards = [];
     for (let i = 0; i < doctors.length; i++) {
         let needed = document.getElementById('speciality').value;
-        if (doctors[i].specialities.includes(needed)) {
+        if (doctors[i].specialities[0].includes(needed)) {
             searched.push(doctors[i]);
         }
 
