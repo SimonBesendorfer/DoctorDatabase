@@ -27,13 +27,8 @@ function load() {
 function loadJSONFromServer() {
     return new Promise(function (resolve, reject) {
         let xhttp = new XMLHttpRequest();
-<<<<<<< HEAD
-        let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + 'doctors.json';
-=======
         let proxy = 'https://cors-anywhere.herokuapp.com/';
         let serverURL = proxy + BASE_SERVER_URL + 'get_doctors.php';
->>>>>>> aa687c70d588d0b3b90cb66be2dcf0661c94aade
         xhttp.open('GET', serverURL);
 
         xhttp.onreadystatechange = function (oEvent) {
