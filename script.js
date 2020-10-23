@@ -10,12 +10,14 @@ let searched = [];
  * if there is an error, it will continue with the function error()
  */
 function load() {
+    document.getElementById("loading").classList.remove('d-none');
     loadJSONFromServer()
         .then(function (result) { //then(function (variable vom server))
             doctors = JSON.parse(result);
+            document.getElementById("loading").classList.add('d-none');
         })
         .catch(function (error) { // Fehler
-            console.error('Fehler beim laden!', error);
+            document.getElementById("loading").classList.add('d-none');
             document.getElementById("error").classList.remove('d-none');
         });
 }
@@ -33,11 +35,13 @@ function loadJSONFromServer() {
 
         xhttp.onreadystatechange = function (oEvent) {
             if (xhttp.readyState === 4) {
-                if (xhttp.status >= 200 && xhttp.status <= 399) {
-                    resolve(xhttp.responseText);
+                let response = JSON.parse(xhttp.responseText);
+                if (response.status >= 200 || response.status <= 399) {
+                    reject(response.error);
                 } else {
-                    reject(xhttp.statusText);
+                    resolve(xhttp.responseText);
                 }
+
             }
         };
 
@@ -57,7 +61,7 @@ function determineProxySettings() {
     } else {
         return 'https://cors-anywhere.herokuapp.com/';
     }
-  }
+}
 
 /**
  * the function showAll() ist started by clicking on the Button "alle anzeigen"
@@ -106,8 +110,6 @@ function search() {
         if (doctors[i].specialities[0].includes(needed)) {
             searched.push(doctors[i]);
         }
-
-        console.log(searched);
     }
     showSearched();
 }
@@ -121,7 +123,23 @@ function search() {
 function showSearched() {
     let vCard = document.getElementById('vCard');
     vCard.innerHTML = "";
+    
     for (let i = 0; i < searched.length; i++) {
+        let DocCard = generateDocCard(doctors[i]);
+        vCards.push(DocCard);
+    }
+    
+    /**
+     * for (let i = 0; i < searched.length; i++) {
+     *  let DocCard = generateDocCard(doctors[i]);
+     *  vCards.push(DocCard);
+     *}
+     * The function above replaces the function below because ther is the function generateDocCard() in the 
+     * doccard.template.js file
+     */
+
+    
+    /*for (let i = 0; i < searched.length; i++) {
         let name = searched[i]['title'] + " " + searched[i]['first_name'] + " " + searched[i]['last_name'];
         let speciality = searched[i]['specialities'];
         let street = searched[i]['street'];
@@ -156,15 +174,6 @@ function showSearched() {
 
                         </div>`
         vCards.push(DocCard);
-    }
+    }**/
     showVCard(0);
-}
-
-/**
- * error() is running when ther is an error while loading the JSON from the PHP Server
- * it will show a PopUp Window with the option to reload the site by clicking
- * on the button "neu Laden"
- */
-function error() {
-    document.getElementById("error").classList.remove('d-none');
 }

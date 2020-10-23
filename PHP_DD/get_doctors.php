@@ -4,7 +4,7 @@ header("Access-Control-Allow-Headers: *");
 
 $rand = rand(0, 10);
 $file = "./doctors.json";
-if ($rand < 1) {
+if ($rand < 5) {
     $file = "error.json";
 }
 
