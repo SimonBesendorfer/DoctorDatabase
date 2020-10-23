@@ -201,7 +201,7 @@ h1 {
     border-radius: 12px;
 }
 
-/* Responsive Design width < 745px **/
+/* Responsive Design width < 800px **/
 
 @media(max-width: 800px) {
     .header {
@@ -250,4 +250,10 @@ h1 {
     .headerLink {
         display: contents;
     }
+}
+
+/* Responsive Design width < 370px **/
+
+@media(max-width: 370px) {
+    
 }
